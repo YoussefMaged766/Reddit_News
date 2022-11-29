@@ -2,7 +2,7 @@ package com.example.redditnews.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.redditnews.db.RedditDatabase
+
 import com.example.redditnews.utils.WebServices
 import dagger.Module
 import dagger.Provides
@@ -19,15 +19,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Provides
-    @Singleton
-    fun databaseProvider(
-        @ApplicationContext context : Context
-    ) : RedditDatabase {
-        return  Room.databaseBuilder(context,RedditDatabase::class.java,"News_DB")
-            .fallbackToDestructiveMigration()
-            .build()
-    }
+//    @Provides
+//    @Singleton
+//    fun databaseProvider(
+//        @ApplicationContext context : Context
+//    ) : RedditDatabase {
+//        return  Room.databaseBuilder(context,RedditDatabase::class.java,"News_DB")
+//            .fallbackToDestructiveMigration()
+//            .build()
+//    }
 
     @Provides
     @Singleton

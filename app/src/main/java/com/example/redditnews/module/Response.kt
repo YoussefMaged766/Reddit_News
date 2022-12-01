@@ -1,7 +1,13 @@
 package com.example.redditnews.module
 
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
+
+
 data class NewsData(
-    val `data`: Data,
+    val data: Data,
     val kind: String
 )
 
@@ -15,119 +21,162 @@ data class Data(
 )
 
 data class Children(
-    val `data`: DataX,
+    val data: DataX,
     val kind: String
 )
 
 data class DataX(
-    val all_awardings: List<AllAwarding>,
-    val allow_live_comments: Boolean,
-    val approved_at_utc: Any,
-    val approved_by: Any,
-    val archived: Boolean,
-    val author: String,
-    val author_flair_background_color: Any,
-    val author_flair_css_class: Any,
-    val author_flair_richtext: List<Any>,
-    val author_flair_template_id: Any,
-    val author_flair_text: Any,
-    val author_flair_text_color: Any,
-    val author_flair_type: String,
-    val author_fullname: String,
-    val author_is_blocked: Boolean,
-    val author_patreon_flair: Boolean,
-    val author_premium: Boolean,
-    val awarders: List<Any>,
-    val banned_at_utc: Any,
-    val banned_by: Any,
-    val can_gild: Boolean,
-    val can_mod_post: Boolean,
-    val category: Any,
-    val clicked: Boolean,
-    val content_categories: Any,
-    val contest_mode: Boolean,
-    val created: Double,
-    val created_utc: Double,
-    val crosspost_parent: String,
-    val crosspost_parent_list: List<CrosspostParent>,
-    val discussion_type: Any,
-    val distinguished: Any,
-    val domain: String,
-    val downs: Int,
-    val edited: Boolean,
-    val gilded: Int,
-    val gildings: GildingsX,
-    val hidden: Boolean,
-    val hide_score: Boolean,
+//    @Ignore
+//    val all_awardings: List<AllAwarding>,
+    val allow_live_comments: Boolean ?=null,
+//    @Ignore
+//    val approved_at_utc: Any,
+//    @Ignore
+//    val approved_by: Any,
+    val archived: Boolean ?=null,
+    val author: String ?=null,
+//    @Ignore
+//    val author_flair_background_color: Any,
+//    @Ignore
+//    val author_flair_css_class: Any,
+//    @Ignore
+//    val author_flair_richtext: List<Any>,
+//    @Ignore
+//    val author_flair_template_id: Any,
+//    @Ignore
+//    val author_flair_text: Any,
+//    @Ignore
+//    val author_flair_text_color: Any,
+    val author_flair_type: String ?=null,
+    val author_fullname: String ?=null,
+    val author_is_blocked: Boolean ?=null,
+    val author_patreon_flair: Boolean ?=null,
+    val author_premium: Boolean ?=null,
+//    @Ignore
+//    val awarders: List<Any>,
+//    @Ignore
+//    val banned_at_utc: Any,
+//    @Ignore
+//    val banned_by: Any,
+    val can_gild: Boolean ?=null,
+    val can_mod_post: Boolean ?=null,
+//    @Ignore
+//    val category: Any,
+    val clicked: Boolean ?=null,
+//    @Ignore
+//    val content_categories: Any,
+    val contest_mode: Boolean ?=null,
+    val created: Double?=null,
+    val created_utc: Double ?=null,
+    val crosspost_parent: String ?=null,
+//    @Ignore
+//    val crosspost_parent_list: List<CrosspostParent>,
+//    @Ignore
+//    val discussion_type: Any,
+//    @Ignore
+//    val distinguished: Any,
+    val domain: String ?=null,
+    val downs: Int ?=null,
+//    val edited: Boolean,
+    val gilded: Int ?=null,
+//    @Ignore
+//    val gildings: GildingsX,
+    val hidden: Boolean ?=null,
+    val hide_score: Boolean ?=null,
+    @PrimaryKey
     val id: String,
-    val is_created_from_ads_ui: Boolean,
-    val is_crosspostable: Boolean,
-    val is_meta: Boolean,
-    val is_original_content: Boolean,
-    val is_reddit_media_domain: Boolean,
-    val is_robot_indexable: Boolean,
-    val is_self: Boolean,
-    val is_video: Boolean,
-    val likes: Any,
-    val link_flair_background_color: String,
-    val link_flair_css_class: Any,
-    val link_flair_richtext: List<Any>,
-    val link_flair_text: Any,
-    val link_flair_text_color: String,
-    val link_flair_type: String,
-    val locked: Boolean,
-    val media: Media,
-    val media_embed: MediaEmbedX,
-    val media_metadata: MediaMetadata,
-    val media_only: Boolean,
-    val mod_note: Any,
-    val mod_reason_by: Any,
-    val mod_reason_title: Any,
-    val mod_reports: List<Any>,
-    val name: String,
-    val no_follow: Boolean,
-    val num_comments: Int,
-    val num_crossposts: Int,
-    val num_reports: Any,
-    val over_18: Boolean,
-    val parent_whitelist_status: String,
-    val permalink: String,
-    val pinned: Boolean,
-    val pwls: Int,
-    val quarantine: Boolean,
-    val removal_reason: Any,
-    val removed_by: Any,
-    val removed_by_category: Any,
-    val report_reasons: Any,
-    val saved: Boolean,
-    val score: Int,
-    val secure_media: SecureMedia,
-    val secure_media_embed: SecureMediaEmbedX,
-    val selftext: String,
-    val selftext_html: String,
-    val send_replies: Boolean,
-    val spoiler: Boolean,
-    val stickied: Boolean,
-    val subreddit: String,
-    val subreddit_id: String,
-    val subreddit_name_prefixed: String,
-    val subreddit_subscribers: Int,
-    val subreddit_type: String,
-    val suggested_sort: Any,
-    val thumbnail: String,
-    val title: String,
-    val top_awarded_type: Any,
-    val total_awards_received: Int,
-    val treatment_tags: List<Any>,
-    val ups: Int,
-    val upvote_ratio: Double,
-    val url: String,
-    val url_overridden_by_dest: String,
-    val user_reports: List<Any>,
-    val view_count: Any,
-    val visited: Boolean,
-    val whitelist_status: String,
-    val wls: Int
+    val is_created_from_ads_ui: Boolean ?=null,
+    val is_crosspostable: Boolean ?=null,
+    val is_meta: Boolean ?=null,
+    val is_original_content: Boolean ?=null,
+    val is_reddit_media_domain: Boolean ?=null,
+    val is_robot_indexable: Boolean ?=null,
+    val is_self: Boolean ?=null,
+    val is_video: Boolean ?=null,
+//    @Ignore
+//    val likes: Any,
+    val link_flair_background_color: String ?=null,
+//    @Ignore
+//    val link_flair_css_class: Any,
+//    @Ignore
+//    val link_flair_richtext: List<Any>,
+//    @Ignore
+//    val link_flair_text: Any,
+    val link_flair_text_color: String ?=null,
+    val link_flair_type: String ?=null,
+    val locked: Boolean ?=null,
+//    @Ignore
+//    val media: Media,
+//    @Ignore
+//    val media_embed: MediaEmbedX,
+//    @Ignore
+//    val media_metadata: MediaMetadata,
+    val media_only: Boolean ?=null,
+//    @Ignore
+//    val mod_note: Any,
+//    @Ignore
+//    val mod_reason_by: Any,
+//    @Ignore
+//    val mod_reason_title: Any,
+//    @Ignore
+//    val mod_reports: List<Any>,
+    val name: String ?=null,
+    val no_follow: Boolean ?=null,
+    val num_comments: Int ?=null,
+    val num_crossposts: Int ?=null,
+//    @Ignore
+//    val num_reports: Any,
+    val over_18: Boolean ?=null,
+    val parent_whitelist_status: String ?=null,
+    val permalink: String ?=null,
+    val pinned: Boolean ?=null,
+    val pwls: Int ?=null,
+    val quarantine: Boolean ?=null,
+//    @Ignore
+//    val removal_reason: Any,
+//    @Ignore
+//    val removed_by: Any,
+//    @Ignore
+//    val removed_by_category: Any,
+//    @Ignore
+//    val report_reasons: Any,
+    val saved: Boolean ?=null,
+    val score: Int ?=null,
+//    @Ignore
+//    val secure_media: SecureMedia,
+//    @Ignore
+//    val secure_media_embed: SecureMediaEmbedX,
+    val selftext: String? = null,
+
+    val selftext_html: String? = null,
+    val send_replies: Boolean = true,
+    val spoiler: Boolean? = null,
+    val stickied: Boolean? = null,
+    val subreddit: String? = null,
+    val subreddit_id: String? = null,
+    val subreddit_name_prefixed: String? = null,
+    val subreddit_subscribers: Int? = null,
+    val subreddit_type: String? = null,
+//    @Ignore
+//    val suggested_sort: Any,
+    val thumbnail: String? = null,
+    val title: String? = null,
+//    @Ignore
+//    val top_awarded_type: Any,
+    val total_awards_received: Int?=null,
+//    @Ignore
+//    val treatment_tags: List<Any>,
+    val ups: Int?=null,
+    val upvote_ratio: Double ?=null,
+    val url: String?=null,
+    val url_overridden_by_dest: String ?=null,
+//    @Ignore
+//    val user_reports: List<Any>,
+//    @Ignore
+//    val view_count: Any,
+    val visited: Boolean ?=null,
+    val whitelist_status: String ?=null,
+    val wls: Int ?=null
 )
 
 data class AllAwarding(

@@ -8,6 +8,19 @@
     <fragment
         android:id="@+id/kotlinNewsFragment"
         android:name="com.example.redditnews.ui.KotlinNewsFragment"
-        android:label="fragment_kotlin_news"
-        tools:layout="@layout/fragment_kotlin_news" />
+        android:label="Reddit News"
+        tools:layout="@layout/fragment_kotlin_news" >
+
+        <action
+            android:id="@+id/action_kotlinNewsFragment_to_detailesFragment"
+            app:destination="@id/detailesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailesFragment"
+        android:name="com.example.redditnews.ui.DetailesFragment"
+        tools:layout="@layout/fragment_detailes" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>

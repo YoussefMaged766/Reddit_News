@@ -2,11 +2,11 @@ package com.example.redditnews.repositories
 
 //import com.example.redditnews.db.RedditDatabase
 
+import android.util.Log
 import com.example.redditnews.db.RedditDatabase
 import com.example.redditnews.module.Children
 import com.example.redditnews.module.DataX
 import com.example.redditnews.module.mapper.toListRedditEntity
-import com.example.redditnews.module.mapper.toRedditEntity
 import com.example.redditnews.utils.Resource
 import com.example.redditnews.utils.WebServices
 import com.google.gson.Gson
@@ -27,6 +27,7 @@ class NewsRepo @Inject constructor(
     suspend fun getOnlineNews() = flow {
         val mDao = database.redditDao()
         try {
+            delay(1000L)
             emit(Resource.loading(null))
 
             // getting old or last saved data from room
@@ -42,38 +43,53 @@ class NewsRepo @Inject constructor(
                 remoteResult.body()?.let {
                     mDao.insert(it.toListRedditEntity())
                 }
+
+
             }
 
 
-//            val response = webServices.getArticles()
-//
-//            if (response.isSuccessful && response.code() == 200) {
-////                val type = object : TypeToken<Children>() {}.type
-////                val errorResponse: Children? =
-////                    gson.fromJson(response.errorBody().charStream(), type)
-//                emit(Resource.success(response.body()))
-//
-//                delay(2000)
-//                val size = response.body()?.data!!.children.size
-////                if (database.redditDao().getAllNews().isEmpty()){
-////
-////                }
-//                for (i in 0..size) {
-//                    insertNews(response.body()?.data!!.children[i].data)
-//                }
+        } catch (e: Exception) {
 
-    } catch (e: Exception) {
-
-        emit(Resource.error(null, e.message.toString()))
-    }
+            emit(Resource.error(null, e.message.toString()))
+            Log.e( "getOnlineNews: ", e.message.toString())
+        }
         //this variable will contains last inserted data no matter if its new or old
         val lastInsertedData = mDao.getAllNews()
         emit(Resource.success(lastInsertedData))
     }.flowOn(Dispatchers.IO)
 
+    suspend fun getNewsDetails(id:String) = flow {
+        emit(Resource.loading(null))
+        val mDao = database.redditDao()
+        try {
+            emit(Resource.loading(null))
 
+            // getting old or last saved data from room
+            val oldData = mDao.getNewDetailes(id = id)
+            emit(Resource.success(oldData))
+            delay(1000L)
 
+            // make api call to fetch new data
+//            val remoteResult = webServices.getArticles()
+
+            // if response successful the new data will be inserted into room database
+//            if (remoteResult.isSuccessful) {
+//                remoteResult.body()?.let {
+//                    mDao.insert(it.toListRedditEntity())
+//                }
+//            }
+
+        } catch (e: Exception) {
+
+            emit(Resource.error(null, e.message.toString()))
+        }
+        //this variable will contains last inserted data no matter if its new or old
+        val lastInsertedData = mDao.getNewDetailes(id)
+        emit(Resource.success(lastInsertedData))
+
+    }.flowOn(Dispatchers.IO)
 }
+
 
 
 

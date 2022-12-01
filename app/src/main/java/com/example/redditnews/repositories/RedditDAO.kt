@@ -23,4 +23,7 @@ interface RedditDAO {
 
     @Insert(onConflict =  OnConflictStrategy.REPLACE)
     suspend fun insert(redditEntity: List<RedditEntity>)
+
+    @Query("SELECT * FROM RedditEntity WHERE id=:id")
+    fun getNewDetailes(id:String): RedditEntity
 }

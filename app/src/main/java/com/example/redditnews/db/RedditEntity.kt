@@ -11,5 +11,6 @@ data class RedditEntity(
     val thumbnail: String? = null,
     val title: String? = null,
     val url: String? = null,
-    val selfText: String? = null
+    val selfText: String? = null,
+    val subreddit: String? = null,
 )

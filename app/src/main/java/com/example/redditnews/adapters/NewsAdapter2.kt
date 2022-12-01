@@ -1,8 +1,10 @@
 package com.example.redditnews.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,7 @@ import com.example.redditnews.module.Children
 import com.example.redditnews.module.Data
 import com.example.redditnews.module.DataX
 import com.example.redditnews.module.NewsData
+import com.example.redditnews.ui.KotlinNewsFragmentDirections
 
 
 class NewsAdapter2() :ListAdapter<RedditEntity, NewsAdapter2.viewholder>(Companion) {
@@ -23,7 +26,7 @@ class NewsAdapter2() :ListAdapter<RedditEntity, NewsAdapter2.viewholder>(Compani
     class viewholder(var binding: NewsItemBinding) : ViewHolder(binding.root){
         fun bind(data :RedditEntity){
             binding.txtTitle.text = data.title
-            Glide.with(binding.root.context).load(data.thumbnail).placeholder(R.drawable.ic_launcher_foreground).into(binding.imgReddit)
+            Glide.with(binding.root.context).load(data.thumbnail).placeholder(R.drawable.no_image).into(binding.imgReddit)
         }
 
     }
@@ -46,6 +49,12 @@ class NewsAdapter2() :ListAdapter<RedditEntity, NewsAdapter2.viewholder>(Compani
 
     override fun onBindViewHolder(holder: viewholder, position: Int) {
         holder.bind(getItem(position))
+
+        holder.binding.root.setOnClickListener {
+            val id = getItem(position).id
+            it.findNavController().navigate(KotlinNewsFragmentDirections.actionKotlinNewsFragmentToDetailesFragment(id))
+            Log.e( "onBindViewHolder: ",id )
+        }
     }
 
 

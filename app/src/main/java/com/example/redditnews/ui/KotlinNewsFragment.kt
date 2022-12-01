@@ -10,23 +10,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.redditnews.R
 import com.example.redditnews.adapters.NewsAdapter
 import com.example.redditnews.adapters.NewsAdapter2
 import com.example.redditnews.databinding.FragmentKotlinNewsBinding
 import com.example.redditnews.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class KotlinNewsFragment : Fragment() {
 
     lateinit var binding: FragmentKotlinNewsBinding
     val viewModel: KotlinNewsViewModel by viewModels()
-     var adapter= NewsAdapter()
+
     var adpter2 = NewsAdapter2()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +52,8 @@ class KotlinNewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        (activity as AppCompatActivity?)!!.supportActionBar!!.setHomeButtonEnabled(true)
         lifecycleScope.launch {
 //            if (checkForInternet(requireContext())){
 //                getOnlineData()
@@ -57,6 +64,13 @@ class KotlinNewsFragment : Fragment() {
             viewModel.redditLiveData.observe(viewLifecycleOwner, Observer {
                 adpter2.submitList(it)
                 binding.recyclerView.adapter = adpter2
+            })
+
+            viewModel.progressLiveData.observe(viewLifecycleOwner, Observer {
+                binding.progress.visibility = it
+            })
+            viewModel.recyclerLiveData.observe(viewLifecycleOwner, Observer {
+                binding.recyclerView.visibility = it
             })
 
         }

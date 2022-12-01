@@ -1,7 +1,5 @@
-package com.example.redditnews.ui
+package com.example.redditnews.ui.details
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.redditnews.db.RedditEntity
 import com.example.redditnews.repositories.NewsRepo

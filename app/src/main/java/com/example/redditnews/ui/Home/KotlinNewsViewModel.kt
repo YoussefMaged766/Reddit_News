@@ -1,8 +1,9 @@
-package com.example.redditnews.ui
+package com.example.redditnews.ui.Home
 
 import android.view.View
 import androidx.lifecycle.*
 import com.example.redditnews.db.RedditEntity
+import com.example.redditnews.module.S
 import com.example.redditnews.repositories.NewsRepo
 import com.example.redditnews.utils.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,9 @@ class KotlinNewsViewModel @Inject constructor(
 
     private val _recyclerLiveData = MutableLiveData<Int>()
     val recyclerLiveData: LiveData<Int> get() = _recyclerLiveData
+
+    private val _recyclerLiveDataError = MutableLiveData<String>()
+    val recyclerLiveDataError: LiveData<String> get() = _recyclerLiveDataError
 
 
 
@@ -49,6 +53,7 @@ class KotlinNewsViewModel @Inject constructor(
               Status.ERROR -> {
                   _progressLiveData.postValue(View.INVISIBLE)
                   _recyclerLiveData.postValue(View.VISIBLE)
+                  _recyclerLiveDataError.postValue(resource.message.toString())
               }
             }
         }

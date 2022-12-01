@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 class NewsRepo @Inject constructor(
     private val webServices: WebServices,
-    val database: RedditDatabase
+    private val database: RedditDatabase
 ) {
 
     suspend fun getOnlineNews() = flow {
@@ -38,11 +38,7 @@ class NewsRepo @Inject constructor(
                 remoteResult.body()?.let {
                     mDao.insert(it.toListRedditEntity())
                 }
-
-
             }
-
-
         } catch (e: Exception) {
 
             emit(Resource.error(null, e.message.toString()))
@@ -51,6 +47,7 @@ class NewsRepo @Inject constructor(
         //this variable will contains last inserted data no matter if its new or old
         val lastInsertedData = mDao.getAllNews()
         emit(Resource.success(lastInsertedData))
+
     }.flowOn(Dispatchers.IO)
 
     suspend fun getNewsDetails(id:String) = flow {
@@ -63,7 +60,6 @@ class NewsRepo @Inject constructor(
             val oldData = mDao.getNewDetailes(id = id)
             emit(Resource.success(oldData))
             delay(1000L)
-
 
         } catch (e: Exception) {
 

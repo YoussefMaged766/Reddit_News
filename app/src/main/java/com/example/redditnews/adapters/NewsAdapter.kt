@@ -11,8 +11,9 @@ import com.bumptech.glide.Glide
 import com.example.redditnews.R
 import com.example.redditnews.databinding.NewsItemBinding
 import com.example.redditnews.db.RedditEntity
+import com.example.redditnews.ui.Home.KotlinNewsFragmentDirections
 
-import com.example.redditnews.ui.KotlinNewsFragmentDirections
+
 
 
 class NewsAdapter() : ListAdapter<RedditEntity, NewsAdapter.viewholder>(Companion) {

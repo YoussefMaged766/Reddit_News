@@ -15,23 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class KotlinNewsViewModel @Inject constructor(
     private val newsRepo: NewsRepo,
-//    private val savedStateHandle: SavedStateHandle
 ) :ViewModel() {
-//    suspend fun getOnlineNews() = newsRepo.getOnlineNews()
-//    suspend fun getOfflineNews() = newsRepo.getOfflineNews()
 
-//    private val _id = MutableLiveData<String>("")
-//    val id: LiveData<String> get() = _id
-//
-//    init {
-//        savedStateHandle.get<String>("id")?.let { idFromHomeScreen ->
-//            if (!idFromHomeScreen.isNullOrBlank()){
-//                _id.postValue(idFromHomeScreen)
-//            }
-//        }
-//
-//        getDetails(id.value.toString())
-//    }
     private val _redditLiveData = MutableLiveData<List<RedditEntity>?>()
     val redditLiveData: LiveData<List<RedditEntity>?> get() = _redditLiveData
 
@@ -41,8 +26,7 @@ class KotlinNewsViewModel @Inject constructor(
     private val _recyclerLiveData = MutableLiveData<Int>()
     val recyclerLiveData: LiveData<Int> get() = _recyclerLiveData
 
-//    private val _detailsLiveData = MutableLiveData<RedditEntity?>()
-//    val detailsLiveData: LiveData<RedditEntity?> get() = _detailsLiveData
+
 
     init {
         getReddit()

@@ -9,7 +9,6 @@ import com.example.redditnews.repositories.RedditDAO
 
 
 @Database(entities = [RedditEntity::class], version = 1)
-@TypeConverters(com.example.redditnews.utils.TypeConverters::class)
 abstract class RedditDatabase :RoomDatabase(){
     abstract fun redditDao() :RedditDAO
 }

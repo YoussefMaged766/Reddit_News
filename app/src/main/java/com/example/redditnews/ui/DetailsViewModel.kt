@@ -20,16 +20,14 @@ class DetailsViewModel @Inject constructor(
     private val _id = MutableLiveData<String>()
     val id: LiveData<String> get() = _id
 
-    val TAG = DetailsViewModel::class.java.simpleName
 
     init {
+        // compare id from room with id from NewsFragment that is clicked
         savedStateHandle.get<String>("id")?.let { idFromHomeScreen ->
-            Log.i("TAGaloooooooooo", "currentId --> $idFromHomeScreen: ")
             if (!idFromHomeScreen.isNullOrBlank()){
                 _id.value = idFromHomeScreen
             }
         }
-        Log.i("TAGaloooooooooo", "currentId fromLiveData --> ${id.value.toString()}: ")
         getDetails(id.value.toString())
     }
     private val _redditLiveData = MutableLiveData<RedditEntity?>()

@@ -10,20 +10,15 @@ import com.example.redditnews.db.RedditEntity
 @Dao
 interface RedditDAO {
 
-//    @Query("SELECT * FROM DataX ")
-//    fun getAllNews(): List<DataX>
-
-//    @Insert(onConflict =  OnConflictStrategy.REPLACE)
-//    fun insert(dataX: DataX)
-
-
-
+    //get All Articles
     @Query("SELECT * FROM RedditEntity")
     fun getAllNews(): List<RedditEntity>
 
+    //Save All Articles
     @Insert(onConflict =  OnConflictStrategy.REPLACE)
     suspend fun insert(redditEntity: List<RedditEntity>)
 
+    // Search for article using Specific key
     @Query("SELECT * FROM RedditEntity WHERE id=:id")
     fun getNewDetailes(id:String): RedditEntity
 }

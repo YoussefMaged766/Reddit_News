@@ -13,7 +13,11 @@
 
         <action
             android:id="@+id/action_kotlinNewsFragment_to_detailesFragment"
-            app:destination="@id/detailesFragment" />
+            app:destination="@id/detailesFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_exit_anim"
+            app:popExitAnim="@anim/pop_enter_anim"/>
     </fragment>
     <fragment
         android:id="@+id/detailesFragment"

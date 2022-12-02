@@ -22,23 +22,28 @@ class NewsRepo @Inject constructor(
     suspend fun getOnlineNews() = flow {
         val mDao = database.redditDao()
         try {
-            delay(1000L)
-            emit(Resource.loading(null))
-
-            // getting old or last saved data from room
-            val oldData = mDao.getAllNews()
-            emit(Resource.success(oldData))
-            delay(1000L)
-
             // make api call to fetch new data
             val remoteResult = webServices.getArticles()
+            emit(Resource.loading(null))
+
+
 
             // if response successful the new data will be inserted into room database
             if (remoteResult.isSuccessful) {
+                emit(Resource.success(remoteResult.body()?.toListRedditEntity()))
                 remoteResult.body()?.let {
                     mDao.insert(it.toListRedditEntity())
                 }
+
+            }else {
+                try {
+                    val oldData = mDao.getAllNews()
+                    emit(Resource.success(oldData))
+                }catch (e:Exception){
+                    emit(Resource.error(null, e.message.toString()))
+                }
             }
+
         } catch (e: Exception) {
 
             emit(Resource.error(null, e.message.toString()))

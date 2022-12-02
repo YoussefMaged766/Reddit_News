@@ -8,6 +8,7 @@ import com.example.redditnews.repositories.NewsRepo
 import com.example.redditnews.utils.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,6 +30,8 @@ class KotlinNewsViewModel @Inject constructor(
 
     private val _recyclerLiveDataError = MutableLiveData<String>()
     val recyclerLiveDataError: LiveData<String> get() = _recyclerLiveDataError
+
+
 
 
 

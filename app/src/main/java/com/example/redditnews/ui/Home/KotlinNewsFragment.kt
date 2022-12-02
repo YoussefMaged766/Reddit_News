@@ -58,9 +58,9 @@ class KotlinNewsFragment : Fragment() {
             viewModel.recyclerLiveData.observe(viewLifecycleOwner, Observer {
                 binding.recyclerView.visibility = it
             })
-            viewModel.recyclerLiveDataError.observe(viewLifecycleOwner, Observer {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-            })
+//            viewModel.recyclerLiveDataError.observe(viewLifecycleOwner, Observer {
+//                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+//            })
 
         }
     }
